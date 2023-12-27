@@ -1,0 +1,63 @@
+<h3>Update Product</h3>
+ 
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-group" hidden>
+        <label class="form-label " for="id">id</label><!--for(label) and id(input) should match-->
+        <input class="form-control " type="number" id="id" formControlName="id"><!--formControlName(input) and element name(product.ts) should match-->
+    </div>
+    <div class="form-group">
+        <label class="form-label" for="name">Name</label>
+        <input class="form-control" type="text" id="name" formControlName="name">
+        <div *ngIf="form.hasError('required','name') && (form.controls['name'].touched ||
+            form.controls['name'].dirty)" class="alert alert-danger " role="alert">
+            Name is required.
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="form-label" for="price">Price</label>
+        <input class="form-control" type="number" id="price" formControlName="price">
+        <div *ngIf="form.hasError('min','price') && (form.controls['price'].touched ||
+            form.controls['price'].dirty)" class="alert alert-danger " role="alert">
+            Minimum price is 1.
+        </div>
+        <div *ngIf="form.hasError('required','price') && (form.controls['price'].touched ||
+            form.controls['price'].dirty)" class="alert alert-danger " role="alert">
+            Price is Required.
+        </div>
+    </div><br>
+    <div class="form-group">
+        <label class="form-check-label " for="categoryId">Category:</label>
+        <select class="form-select" for="categoryId" formControlName="categoryId">
+            <option value="">Select</option>
+            <option *ngFor="let category of categoryArray" value="{{category.id}}">{{category.id}} - {{ category.name }}
+            </option> <!--categoryArray is the list in which we storing the various categories by importing the category component-->
+            <!--The import, initialisation and storing of the categoryArray is done in add-product.component.ts-->
+        </select>
+        <div *ngIf="form.hasError('required','categoryId') && (form.controls['categoryId'].touched ||
+            form.controls['categoryId'].dirty)" class="alert alert-danger " role="alert">
+            Category is required.
+        </div>
+    </div><br>
+    <div class="form-group">
+        <label class="form-label" for="manufacturedDate">Manufactured Date:</label>
+        <input class="form-control" type="date" id="manufacturedDate" formControlName="manufacturedDate" >
+        <div *ngIf="form.hasError('manufacturedDate') && (form.controls['manufacturedDate'].touched ||
+            form.controls['manufacturedDate'].dirty)" class="alert alert-danger " role="alert">
+            Manufactured Date is required.
+        </div>
+    </div><br>
+    <div class="form-group">
+        <label class="form-label" for="imageUrl">Image URL:</label>
+        <input class="form-control" type="url" id="imageUrl" formControlName="imageUrl">
+        <div *ngIf="form.hasError('imageUrl') && (form.controls['imageUrl'].touched ||
+            form.controls['imageUrl'].dirty)" class="alert alert-danger " role="alert">
+            Provide valid Url. 
+        </div>
+    </div><br>
+ 
+ 
+    <div class="form-group">
+        <input class="btn btn-primary " [disabled]="form.invalid" type="submit" value="Update Product">
+    </div>
+ 
+</form>

@@ -1,0 +1,18 @@
+<h3>Category List</h3>
+
+<table class="table table-striped ">
+    <thead>
+        <th>Id</th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let category of list"> <!--ngFor-Angular Directive   category is a variable-->
+            <td>{{category.id}}</td> <!--interpolation option for databinding-->
+            <td>{{category.name}}</td>
+            <td><button style="width:40%;margin-left:4%;margin-right:4%" class="btn btn-primary" [routerLink]="['/categories/edit/',category.id]">Edit</button></td>
+        </tr>
+    </tbody>
+    <br>
+</table>
